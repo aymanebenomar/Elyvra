@@ -40,8 +40,7 @@ export default function Navbar() {
             scrolled ? "gap-2" : "gap-3"
           }`}
         >
-         
-         
+          <img src={logo} alt="Elyvra Logo" className="w-9 h-9 object-contain" />
           <span
             className={`font-light transition-all duration-500 ${
               scrolled
