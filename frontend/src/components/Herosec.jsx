@@ -3,9 +3,16 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 
-// Example videos (replace with your own)
+// Example videos
 import beforeVideo from "../assets/before.mp4";
 import afterVideo from "../assets/after.mp4";
+
+// Trusted company logos (replace with actual logo paths)
+import amazonLogo from "../assets/amazon.png";
+import googleLogo from "../assets/amazon.png";
+import netflixLogo from "../assets/amazon.png";
+import metaLogo from "../assets/amazon.png";
+import appleLogo from "../assets/amazon.png";
 
 export default function HeroSection() {
   const loopTexts = ["Talking Head", "Marketing", "Instagram", "YouTube", "Videos"];
@@ -18,8 +25,37 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
+  const trustedCompanies = [
+    { name: "Amazon", logo: amazonLogo },
+    { name: "Google", logo: googleLogo },
+    { name: "Netflix", logo: netflixLogo },
+    { name: "Meta", logo: metaLogo },
+    { name: "Apple", logo: appleLogo },
+  ];
+
   return (
     <section className="relative w-full min-h-screen bg-gradient-hero flex flex-col overflow-hidden pb-24">
+      
+      {/* Trusted by creatives */}
+      <div className="absolute top-4 w-full flex justify-center z-20">
+        <div className="w-[40%] relative overflow-hidden">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-white/90 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white/90 to-transparent z-10 pointer-events-none"></div>
+          
+          <div className="flex gap-6 animate-horizontal-loop">
+            {trustedCompanies.concat(trustedCompanies).map((company, i) => (
+              <img
+                key={i}
+                src={company.logo}
+                alt={company.name}
+                className="h-10 object-contain"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div
@@ -32,19 +68,7 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Top tag */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white/80 backdrop-blur-sm text-accent px-6 py-2.5 rounded-full font-semibold text-sm shadow-soft border border-accent/10"
-        >
-          Edit your videos in seconds
-        </motion.div>
-      </div>
-
-      <div className="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center justify-between flex-1 pt-4 md:pt-8">
+      <div className="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center justify-between flex-1 pt-4 md:pt-6">
         {/* Left Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -52,7 +76,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8 }}
           className="w-full md:w-1/2 flex flex-col gap-8 mb-12 md:mb-0"
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-black leading-tight tracking-tight">
             Instant AI Animations for{" "}
             <span className="inline-block relative h-[1.2em]">
               <AnimatePresence mode="wait">
@@ -62,22 +86,31 @@ export default function HeroSection() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.6 }}
-                  className="bg-gradient-accent bg-clip-text text-transparent font-extrabold"
+                  className="font-extrabold text-black"
                 >
                   {loopTexts[currentText]}
                 </motion.span>
               </AnimatePresence>
             </span>
           </h1>
-          <p className="text-muted-foreground text-xl md:text-2xl font-normal max-w-lg">
+          <p className="text-black text-xl md:text-2xl font-normal max-w-lg">
             Turn your raw videos into engaging, animated content in seconds.
           </p>
           <div className="flex flex-wrap gap-4 mt-2">
             <Link
               to="/signup"
-              className="px-8 py-4 bg-gradient-accent text-primary-foreground rounded-2xl font-semibold shadow-soft hover:shadow-video transition-all duration-300 hover:scale-105"
+              className="
+                inline-flex items-center gap-2
+                text-white bg-black hover:bg-black/80
+                border border-white/10 shadow-xs
+                font-light tracking-wide
+                leading-5 rounded-full text-sm
+                px-5 py-2 transition-all duration-300
+              "
+              style={{ fontFamily: "Inter, sans-serif" }}
             >
-              Get Started for Free
+              Get Started
+              <ChevronRight className="w-4 h-4 transform rotate-45" strokeWidth={2} />
             </Link>
             <Link
               to="/features"
@@ -152,12 +185,24 @@ export default function HeroSection() {
               playsInline
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-4 left-4 bg-gradient-accent text-primary-foreground px-4 py-2 rounded-xl text-sm font-semibold shadow-soft backdrop-blur-sm">
-              After ✨
-            </div>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Horizontal loop CSS */}
+      <style>
+        {`
+          @keyframes horizontal-loop {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-horizontal-loop {
+            display: flex;
+            gap: 2rem;
+            animation: horizontal-loop 8s linear infinite;
+          }
+        `}
+      </style>
     </section>
   );
 }
