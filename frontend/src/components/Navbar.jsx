@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.jpeg";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,8 +24,8 @@ export default function Navbar() {
       ref={navbarRef}
       className={`transition-all duration-500 ease-in-out mx-auto z-50 ${
         scrolled
-          ? "fixed top-4 left-1/2 -translate-x-1/2 w-[63%] bg-black/70 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.4)] py-2.5 border border-white/10 rounded-2xl"
-          : "absolute bottom-4 left-1/2 -translate-x-1/2 w-[78%] bg-black/40 backdrop-blur-lg py-3.5 border border-white/10 rounded-2xl"
+          ? "fixed top-4 left-1/2 -translate-x-1/2 w-[63%] bg-white/80 backdrop-blur-xl py-2.5 border border-gray-300/30 rounded-2xl"
+          : "fixed top-4 left-1/2 -translate-x-1/2 w-[78%] bg-transparent py-3.5 border border-gray-300/30 rounded-2xl"
       }`}
     >
       <div
@@ -40,12 +39,11 @@ export default function Navbar() {
             scrolled ? "gap-2" : "gap-3"
           }`}
         >
-          <img src={logo} alt="Elyvra Logo" className="w-9 h-9 object-contain" />
           <span
             className={`font-light transition-all duration-500 ${
               scrolled
-                ? "text-black tracking-tight text-[0.82rem]"
-                : "text-black tracking-wide text-xl"
+                ? "text-gray-800 tracking-tight text-[0.82rem]"
+                : "text-gray-800 tracking-wide text-xl"
             }`}
             style={{ fontFamily: "Inter, sans-serif" }}
           >
@@ -59,7 +57,7 @@ export default function Navbar() {
             <Link
               key={link}
               to={`/${link.toLowerCase()}`}
-              className="font-light tracking-widest text-[0.85rem] uppercase text-white/80 hover:text-white transition-all"
+              className="font-light tracking-widest text-[0.85rem] uppercase text-gray-700 hover:text-gray-900 transition-all"
               style={{ fontFamily: "Inter, sans-serif" }}
             >
               {link}
@@ -71,7 +69,7 @@ export default function Navbar() {
         <div className={`hidden md:flex items-center transition-all duration-500 ${scrolled ? "gap-3" : "gap-4"}`}>
           <Link
             to="/signin"
-            className="font-light tracking-wide text-white/80 hover:text-white transition-colors duration-300"
+            className="font-light tracking-wide text-gray-700 hover:text-gray-900 transition-colors duration-300"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
             Sign In
