@@ -8,15 +8,16 @@ import beforeVideo from "../assets/before.mp4";
 import afterVideo from "../assets/after.mp4";
 
 // Trusted company logos
-import amazonLogo from "../assets/amazon.png";
-import googleLogo from "../assets/amazon.png";
-import netflixLogo from "../assets/amazon.png";
-import metaLogo from "../assets/amazon.png";
-import appleLogo from "../assets/amazon.png";
+import amazonLogo from "../assets/nordea.png";
+import googleLogo from "../assets/spotidy.png";
+import netflixLogo from "../assets/nordea.png";
+import metaLogo from "../assets/compagnie.png";
+import appleLogo from "../assets/nordea.png";
 
 export default function HeroSection() {
-  const loopTexts = ["Talking Head", "Marketing", "Instagram", "YouTube", "Videos"];
+  const loopTexts = ["Marketing", "Instagram", "YouTube", "Tiktok"];
   const [currentText, setCurrentText] = useState(0);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,6 +25,16 @@ export default function HeroSection() {
     }, 2000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Email submitted:", email);
+    // Add your form submission logic here
+  };
+
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
+  };
 
   const trustedCompanies = [
     { name: "Amazon", logo: amazonLogo },
@@ -63,45 +74,50 @@ export default function HeroSection() {
       {/* Main Content */}
       <div className="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center justify-between flex-1 pt-4 md:pt-6">
         {/* Left Text Content */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="w-full md:w-1/2 flex flex-col gap-8 mb-12 md:mb-0"
+<motion.div
+  initial={{ opacity: 0, x: -50 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8 }}
+  className="w-full md:w-1/2 flex flex-col gap-6 mb-12 md:mb-0 -translate-x-2"
+>
+  <h1 className="text-4xl md:text-6xl font-bold text-black leading-tight tracking-tight">
+    Put <span className="underline">people</span> first with{" "}
+    Instant AI <span className="text-black underline decoration-gray-400 decoration-2">animations</span> for your {" "}
+    <span className="inline-block relative h-[1.2em]">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={currentText}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.2 }}
+          transition={{ duration: 0.5 }}
+          className="font-extrabold bg-gradient-to-r from-gray-500 to-black bg-clip-text text-transparent"
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-black leading-tight tracking-tight">
-            Put <span className="underline">people</span> first with{" "}
-            <span className="inline-block relative h-[1.2em]">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={currentText}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.6 }}
-                  className="font-extrabold text-black"
-                >
-                  {loopTexts[currentText]}
-                </motion.span>
-              </AnimatePresence>
-            </span>
-          </h1>
-          <p className="text-black text-xl md:text-2xl font-normal max-w-lg">
-            Faster, user-friendly and engaging. Turn ideas into interactive content. Your daily posts with your own branded website.
-          </p>
-          <div className="flex flex-wrap gap-4 mt-2">
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-black"
-              />
-              <button className="px-5 py-2 bg-black text-white rounded-full text-sm hover:bg-black/80 transition-all duration-300">
-                Book a demo trial
-              </button>
-            </div>
-          </div>
-        </motion.div>
+          {loopTexts[currentText]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+    <br />
+    videos
+  </h1>
+  <p className="text-black text-lg md:text-xl font-light max-w-lg">
+    Faster, user-friendly and engaging. Turn ideas into interactive content. Your daily posts with your own branded website.
+  </p>
+  <div className="flex flex-wrap gap-4 mt-2">
+    <form onSubmit={handleSubmit} className="flex gap-2">
+      <input
+        type="email"
+        value={email}
+        onChange={handleInputChange}
+        placeholder="Enter your email"
+        className="px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-black w-48"
+      />
+      <button type="submit" className="px-5 py-2 bg-black text-white rounded-full text-sm hover:bg-black/80 transition-all duration-300">
+        Book a demo trial
+      </button>
+    </form>
+  </div>
+</motion.div>
 
         {/* Right Video Comparison */}
         <motion.div
@@ -174,7 +190,7 @@ export default function HeroSection() {
       {/* Trusted by creatives - MOVED TO BOTTOM */}
       <div className="w-full flex justify-center mt-8">
         <div className="flex flex-col items-center">
-          <p className="text-sm font-medium text-gray-600 tracking-wider -translate-y-10">Trusted by creatives</p>
+          <p className="text-sm font-medium text-gray-600 tracking-wider -translate-y-10">Trusted by creatives at</p>
           <div className="w-[35%] relative overflow-hidden">
             <div className="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-white/90 to-transparent z-10 pointer-events-none"></div>
             <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white/90 to-transparent z-10 pointer-events-none"></div>
